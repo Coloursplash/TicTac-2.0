@@ -1,5 +1,7 @@
 from os import system, name
-import math # for truncating when adding the starting area
+from math import trunc # for truncating when adding the starting area
+from numpy import array
+import scipy.ndimage as ndimage
 
 # globals
 SIZE = 11
@@ -12,8 +14,8 @@ for y in range(SIZE):
         grid[y].append("-")
 
 # add starting area
-middleX = math.trunc(SIZE / 2)
-middleY = math.trunc(SIZE / 2)
+middleX = trunc(SIZE / 2)
+middleY = trunc(SIZE / 2)
 # creates a 4 tall line
 for i in range(-2, 2):
     grid[middleY + i][middleX] = "|"
@@ -233,6 +235,24 @@ while not gameOver:
             for x in range(SIZE):
                 if grid[y][x] == "T":
                     grid[y][x] = "|"
+        
+        # fill in gaps
+        temp = grid
+        for y in range(SIZE):
+            for x in range(SIZE):
+                if temp[y][x] == "-":
+                    temp[y][x] = 0
+                else:
+                    temp[y][x] = 1
+        data = array(temp)
+        out = ndimage.binary_fill_holes(data)
+        for y in range(SIZE):
+            for x in range(SIZE):
+                if out[y][x] == True:
+                    grid[y][x] = "|"
+                elif out[y][x] == False:
+                    grid[y][x] = "-"
+
     # replace - with #
     elif action == 3:
         # repeat twice
@@ -290,6 +310,7 @@ while not gameOver:
     if not actionPossible:
         gameOver = True
         reason = "No possible moves, DRAW!"
+        break
 
     # reprint the grid
     clear()
