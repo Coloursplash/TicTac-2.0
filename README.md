@@ -13,10 +13,10 @@ Each turn 1 of 3 actions can be made:
 3. Block two empty grid tiles
 
 1. Your symbol has to be on an empty grid tile, you can't replace an opponents or place it on a non-existing tile (shown with a '|')
-2. The first new tile must neighbour an already existing tile. All 4 newly created grid tiles must be neighbouring in any direction. By neighbouring, it refers to the diagram below.
-❌❌❌❌❌
-❌✓ ✓ ✓ ❌
-❌✓ T ✓ ❌
-❌✓ ✓ ✓ ❌
+2. The first new tile must neighbour an already existing tile. All 4 newly created grid tiles must be neighbouring in any direction. By neighbouring, it refers to the diagram below. \
+❌❌❌❌❌ \
+❌✓ ✓ ✓ ❌ \
+❌✓ T ✓ ❌ \
+❌✓ ✓ ✓ ❌ \
 ❌❌❌❌❌
 3. Like action 1, only empty grid tiles can be blocked. A blocked tile cannot be replaced with a symbol.
