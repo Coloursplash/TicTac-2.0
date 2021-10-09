@@ -2,6 +2,7 @@ from os import system, name
 from math import trunc # for truncating when adding the starting area
 from numpy import array
 import scipy.ndimage as ndimage
+from copy import deepcopy
 
 # globals
 SIZE = 11
@@ -237,18 +238,20 @@ while not gameOver:
                     grid[y][x] = "|"
         
         # fill in gaps
-        temp = grid
+        # deepcopy must be used here otherwise a reference is created to the grid object
+        temp = deepcopy(grid)
         for y in range(SIZE):
             for x in range(SIZE):
                 if temp[y][x] == "-":
                     temp[y][x] = 0
                 else:
                     temp[y][x] = 1
+                print(grid)
         data = array(temp)
         out = ndimage.binary_fill_holes(data)
         for y in range(SIZE):
             for x in range(SIZE):
-                if out[y][x] == True:
+                if out[y][x] == True and grid[y][x] == "-":
                     grid[y][x] = "|"
                 elif out[y][x] == False:
                     grid[y][x] = "-"
@@ -313,7 +316,7 @@ while not gameOver:
         break
 
     # reprint the grid
-    clear()
+    #clear()
     printGrid()
 
     changePlayer()
