@@ -194,7 +194,7 @@ while not gameOver:
                 if isFirst:
                     validTiles = ["|", "X", "O", "#"]
                 else:
-                    validTiles.append("T")
+                    validTiles = ["T"]
 
                 valid = False
                 if grid[y][x] == "-":
@@ -246,7 +246,6 @@ while not gameOver:
                     temp[y][x] = 0
                 else:
                     temp[y][x] = 1
-                print(grid)
         data = array(temp)
         out = ndimage.binary_fill_holes(data)
         for y in range(SIZE):
@@ -316,7 +315,7 @@ while not gameOver:
         break
 
     # reprint the grid
-    #clear()
+    clear()
     printGrid()
 
     changePlayer()
